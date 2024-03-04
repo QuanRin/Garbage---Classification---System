@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<!--<html class="no-js" lang="zxx">-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Environmental</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"
+            integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    ></script>
+    <!--    <link rel="manifest" href="site.webmanifest" />-->
+    <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="../static/assets/img/favicon.ico"
+    />
+
+    <!-- CSS here -->
+
+    <link th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/owl.carousel.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/slicknav.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/flaticon.css}" rel="stylesheet" />
+    <link
+            rel="stylesheet"
+            href="../static/assets/css/progressbar_barfiller.css"
+    />
+    <link th:href="@{/assets/css/progressbar_barfiller.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/gijgo.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/animate.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/animate.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/animate.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/fontawesome-all.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/themify-icons.css}" rel="stylesheet" />
+
+    <link th:href="@{/assets/css/slick.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/nice-select.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+    <style>
+        #lds-ring {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(77, 76, 76, 0.8);
+          z-index: 9999;
+        }
+        #lds-ring div {
+          box-sizing: border-box;
+          display: block;
+          position: absolute;
+          width: 64px;
+          height: 64px;
+          margin: 8px;
+          border: 8px solid #fff;
+          border-radius: 50%;
+          animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          border-color: #489553 transparent transparent transparent;
+        }
+        #lds-ring div:nth-child(1) {
+          animation-delay: -0.45s;
+        }
+        #lds-ring div:nth-child(2) {
+          animation-delay: -0.3s;
+        }
+        #lds-ring div:nth-child(3) {
+          animation-delay: -0.15s;
+        }
+        @keyframes lds-ring {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+        main {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          gap: 3rem;
+          padding-top: 5rem;
+        }
+        #previewImage {
+          width: 40vw;
+          height: 70vh;
+          border: 1px solid #09cc7f;
+          border-radius: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <!-- Header Start -->
+    <div class="header-area">
+        <div class="main-header">
+            <div class="header-bottom header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo">
+                                <a href="index.html"
+                                ><img src="../static/assets/img/logo/logo.png" alt=""
+                                /></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10">
+                            <div
+                                    class="menu-wrapper d-flex align-items-center justify-content-end"
+                            >
+                                <!-- Main-menu -->
+                                <span>Garbage Classify System</span>
+                                <!-- Header-btn -->
+                                <div class="header-right-btn d-none d-lg-block ml-20">
+                                    <a href="index.html" class="btn header-btn">HomePage</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+</header>
+<main>
+    <div id="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <img id="previewImage" alt="Preview Image" />
+    <div class="result">
+        <span id="result-text" style="font-size: 2rem"></span>
+        <span id="kind-text" style="font-size: 2rem"></span>
+    </div>
+</main>
+
+<!-- Scroll Up -->
+<div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+
+<!-- JS here -->
+<script src="../static/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+<script src="../static/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="../static/assets/js/popper.min.js"></script>
+<script src="../static/assets/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+      let photoCheckInterval;
+      let isIntervalActive = true;
+      let arduinoServerIP = "172.20.10.2";
+      toggleLoader(false);
+
+      async function isPhotoAdded() {
+        console.log("Hearing.........");
+        try {
+          const data = await $.ajax({
+            url: "http://localhost:8080/api/v1/imageCount",
+            type: "GET",
+            processData: false,
+            contentType: false,
+          });
+
+          if (data === 1 && isIntervalActive) {
+            clearInterval(photoCheckInterval);
+            isIntervalActive = false; // Tạm dừng vòng lặp
+          }
+
+          if (data === 1) {
+            const response = await $.ajax({
+              url: "http://localhost:8080/api/v1/imgQueueFirst",
+              type: "GET",
+              processData: false,
+              contentType: false,
+            });
+
+            $("#previewImage").attr(
+              "src",
+              "http://localhost:8080/api/v1/image/" + response
+            );
+
+            const imgName = response;
+            const url =
+              "http://localhost:8080/api/v1/result?imgName=" + imgName;
+            toggleLoader(true);
+
+            const resultResponse = await $.ajax({
+              url: url,
+              type: "GET",
+              contentType: "application/json",
+              processData: false,
+              contentType: false,
+            });
+            let responseObject = JSON.parse(resultResponse);
+            let typeValue = responseObject.class;
+            let kindValue = responseObject.type;
+            $("#result-text").text(
+              "Class Of Garbage: " + " " + typeValue + "   ||   "
+            );
+            $("#kind-text").text("Kind Of Garbage:" + " " + kindValue);
+            const responeDelete = await $.ajax({
+              url: "http://localhost:8080/api/v1/imageQueue",
+              type: "DELETE",
+            });
+            await moveArduino(arduinoServerIP, typeValue);
+            if (responeDelete) {
+              let form = new FormData();
+              form.append("img", imgName);
+              form.append("kindOfGarbage", kindValue);
+              form.append("classOfGarbage", typeValue);
+              await $.ajax({
+                url: "http://localhost:8080/api/v1/garbage",
+                type: "POST",
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                  if (response) {
+                    console.log(response);
+                    moveArduino(typeValue);
+                    toggleLoader(false);
+                    deleteImageAndResult();
+                    isIntervalActive = true; // Bật lại vòng lặp
+                    startChecking();
+                  }
+                },
+                error: function (error) {
+                  console.error("Ajax error:", error);
+                },
+              });
+            }
+          }
+
+          console.log("Dữ liệu từ AJAX:", data);
+        } catch (error) {
+          console.error("Lỗi AJAX:", error);
+        }
+      }
+
+      function moveArduino(arduinoServerIP, typeValue) {
+        if (typeValue == "recycle") {
+          $.ajax({
+            url: "http://" + arduinoServerIP + "/ar/1",
+            type: "GET",
+            processData: false,
+            contentType: false,
+          });
+        }
+        if (typeValue == "glass") {
+          $.ajax({
+            url: "http://" + arduinoServerIP + "/ar/2",
+            type: "GET",
+            processData: false,
+            contentType: false,
+          });
+        }
+        if (typeValue == "other") {
+          $.ajax({
+            url: "http://" + arduinoServerIP + "/ar/3",
+            type: "GET",
+            processData: false,
+            contentType: false,
+          });
+        }
+        if (typeValue == "hazadous") {
+          $.ajax({
+            url: "http://" + arduinoServerIP + "/ar/4",
+            type: "GET",
+            processData: false,
+            contentType: false,
+          });
+        }
+      }
+
+      function deleteImageAndResult() {
+        setTimeout(function () {
+          $("#previewImage").attr("src", "");
+          $("#result-text").text("");
+          $("#kind-text").text("");
+        }, 3500);
+      }
+
+      function startChecking() {
+        photoCheckInterval = setInterval(isPhotoAdded, 50);
+      }
+
+      startChecking();
+
+      function toggleLoader(show) {
+        $("#lds-ring").css("display", show ? "flex" : "none");
+      }
+    });
+</script>
+</body>
+</html>
